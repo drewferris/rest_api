@@ -9,7 +9,7 @@ const expect = chai.expect;
 const request = chai.request;
 const dbPort = process.env.MONGOLAB_URI;
 process.env.MONGOLAB_URI = 'mongodb://localhost/test_db';
-require('../server');
+require('../api_server');
 
 describe('Token tests', () => {
 
