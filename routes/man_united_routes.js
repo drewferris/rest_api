@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser').json();
 const ManUnitedPlayer = require('../model/man_United_Player');
+const jwtAuth = require('./lib/jwt_auth');
 
 const router = module.exports = exports = express.Router();
 
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.post('/', bodyParser,  (req, res) => {
+router.post('/', bodyParser, jwtAuth, (req, res) => {
   let newManUnitedPlayer = new ManUnitedPlayer(req.body);
   newManUnitedPlayer.save((err, data) => {
     if(err) return res.json({
@@ -25,7 +26,7 @@ router.post('/', bodyParser,  (req, res) => {
   });
 });
 
-router.put('/', bodyParser, (req, res, next) => {
+router.put('/', bodyParser, jwtAuth, (req, res, next) => {
   let _id = req.body._id;
   ManUnitedPlayer.findOneAndUpdate({_id}, req.body, (err) => {
     if(err) return next(err);
@@ -34,7 +35,7 @@ router.put('/', bodyParser, (req, res, next) => {
   });
 });
 
-router.delete('/:id', bodyParser, (req, res, next) => {
+router.delete('/:id', bodyParser, jwtAuth, (req, res, next) => {
   let _id = req.params.id;
   ManUnitedPlayer.findOneAndRemove({_id}, null, (err) => {
     if(err) return next(err);
