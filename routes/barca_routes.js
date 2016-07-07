@@ -3,7 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser').json();
 const BarcaPlayer = require('../model/barca_Player');
-const jwtAuth = require('./lib/jwt_auth');
+const jwtAuth = require('../lib/jwt_auth');
 
 const router = module.exports = exports = express.Router();
 
